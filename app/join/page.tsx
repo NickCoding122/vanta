@@ -6,7 +6,7 @@ export default function JoinPage() {
       </h1>
 
       <p className="text-sm opacity-80 max-w-[34ch]">
-        Share your details below. Every profile is reviewed by a working model. We are opening first in Milan, with more cities to follow.
+        Share your details below. Every profile is reviewed by a working model or trusted industry professional.
       </p>
 
       <form className="mt-6 space-y-4">
@@ -15,9 +15,25 @@ export default function JoinPage() {
           placeholder="First and last name"
           className="w-full border border-white/60 bg-transparent text-sm px-3 py-2 placeholder:opacity-70 outline-none"
         />
+        <select
+          name="role"
+          defaultValue=""
+          className="w-full border border-white/60 bg-transparent text-sm px-3 py-2 outline-none"
+        >
+          <option value="" disabled>
+            Role (model, photographer, stylist…)
+          </option>
+          <option value="model">Model</option>
+          <option value="photographer">Photographer</option>
+          <option value="stylist">Stylist</option>
+          <option value="mua">Makeup artist</option>
+          <option value="designer">Designer</option>
+          <option value="agency">Agency / scout</option>
+          <option value="other">Other</option>
+        </select>
         <input
           type="text"
-          placeholder="@username"
+          placeholder="Instagram handle"
           className="w-full border border-white/60 bg-transparent text-sm px-3 py-2 placeholder:opacity-70 outline-none"
         />
         <select

@@ -8,7 +8,7 @@ export default function Home() {
           A private network for models.
         </h1>
         <p className="text-sm md:text-base opacity-80 mt-4 max-w-[34ch]">
-          Verified profiles only. Built for models, by models. Launching in Milan, then other fashion capitals.
+          Verified profiles only. Built for models and fashion professionals.
         </p>
       </div>
 
@@ -18,12 +18,6 @@ export default function Home() {
           className="inline-flex items-center justify-center border border-white px-6 py-2 text-xs tracking-[0.2em] uppercase hover:opacity-80 transition-opacity"
         >
           Apply to join
-        </Link>
-        <Link
-          href="/about"
-          className="text-xs opacity-70 mt-4 underline-offset-4 hover:underline"
-        >
-          About Vanta
         </Link>
       </div>
     </div>
