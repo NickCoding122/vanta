@@ -6,7 +6,7 @@ export default function Nav() {
   return (
     <nav className="flex gap-6 text-xs tracking-[0.18em] uppercase">
       <Link href="/">Home</Link>
-      <Link href="/join">Apply</Link>
+      <Link href="/apply">Apply</Link>
       <Link href="/about">About</Link>
     </nav>
   );
