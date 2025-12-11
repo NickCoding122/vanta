@@ -56,7 +56,7 @@ export default function ApplyPage() {
       </h1>
 
       <p className="text-sm opacity-80 max-w-[34ch]">
-        Share your details below. Every profile is reviewed by a working model or trusted industry professional.
+        Share your details below. Every profile is reviewed by a professional model or trusted industry professional.
       </p>
 
       <form onSubmit={handleSubmit} className="mt-6 space-y-4">
