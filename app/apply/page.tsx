@@ -9,7 +9,6 @@ export default function ApplyPage() {
 
   async function handleSubmit(e: FormEvent<HTMLFormElement>) {
     e.preventDefault();
-    alert("Apply form submit handler is running");
     setSubmitting(true);
     setStatus("idle");
 
