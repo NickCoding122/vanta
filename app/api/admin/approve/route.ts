@@ -66,7 +66,7 @@ export async function POST(request: Request) {
     const resend = new Resend(process.env.RESEND_API_KEY);
 
     await resend.emails.send({
-      from: "Vantra <no-reply@vantra.com>",
+      from: "Vantra <info@vantra.app>",
       to: email,
       template: {
         id: "vantra.application.approved",
