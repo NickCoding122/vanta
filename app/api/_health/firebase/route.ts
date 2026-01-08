@@ -1,4 +1,4 @@
-import { auth } from "@/lib/firebaseAdmin";
+import { auth } from "../../../../lib/firebaseAdmin";
 import { NextResponse } from "next/server";
 
 export async function GET() {
