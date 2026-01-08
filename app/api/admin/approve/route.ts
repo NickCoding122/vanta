@@ -4,17 +4,23 @@ import { auth, db } from "../../../../lib/firebaseAdmin";
 import { Resend } from "resend";
 
 export async function POST(request: Request) {
-  const snapshot = await db.collection("applications").limit(10).get();
-
-  const visibleIds = snapshot.docs.map((d) => d.id);
-  
-  return NextResponse.json({
-    debug: true,
-    visibleApplicationIds: visibleIds,
-  });
-
-  
   try {
+    // ---- DIAGNOSTIC MODE ----
+    // List visible application IDs from Firestore
+    const snapshot = await db.collection("applications").limit(10).get();
+
+    const visibleApplicationIds = snapshot.docs.map((doc) => doc.id);
+
+    return NextResponse.json({
+      debug: true,
+      visibleApplicationIds,
+    });
+
+    // ---- NORMAL APPROVAL LOGIC (TEMPORARILY DISABLED) ----
+    // Everything below is intentionally unreachable for now.
+    // Do not delete it — we will re-enable it once diagnostics are done.
+
+    /*
     const data = (await request.json()) as { applicationId?: string };
     const applicationId = data.applicationId;
 
@@ -25,7 +31,6 @@ export async function POST(request: Request) {
       );
     }
 
-    // Fetch application
     const applicationRef = db.collection("applications").doc(applicationId);
     const applicationSnapshot = await applicationRef.get();
 
@@ -40,10 +45,9 @@ export async function POST(request: Request) {
       email?: string;
       fullName?: string;
     };
-    
+
     const email = applicationData.email;
     const name = applicationData.fullName;
-
 
     if (!email || !name) {
       return NextResponse.json(
@@ -52,7 +56,6 @@ export async function POST(request: Request) {
       );
     }
 
-    // Create or fetch Firebase Auth user
     try {
       await auth.getUserByEmail(email);
     } catch (error) {
@@ -67,18 +70,15 @@ export async function POST(request: Request) {
       });
     }
 
-    // Generate password reset link
     const resetUrl = await auth.generatePasswordResetLink(email, {
       url: `${process.env.NEXT_PUBLIC_APP_URL}/login`,
     });
 
-    // Update Firestore application status
     await applicationRef.update({
       status: "approved",
       approvedAt: admin.firestore.FieldValue.serverTimestamp(),
     });
 
-    // Send approval email via Resend template
     const resend = new Resend(process.env.RESEND_API_KEY);
 
     await resend.emails.send({
@@ -94,6 +94,7 @@ export async function POST(request: Request) {
     });
 
     return NextResponse.json({ success: true });
+    */
   } catch (error) {
     const message =
       error instanceof Error ? error.message : "Unknown server error";
