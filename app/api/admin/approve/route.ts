@@ -62,12 +62,14 @@ export async function POST(request: Request) {
   await resend.emails.send({
     from: "Vantra <no-reply@vantra.com>",
     to: email,
-    template_id: "vantra.application.approved",
+    template: {
+    id: "vantra.application.approved",
     params: {
       name,
       reset_url: resetUrl,
     },
-  });
+  },
+});
 
   return NextResponse.json({ success: true });
 }
