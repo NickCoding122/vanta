@@ -5,16 +5,16 @@ const { FIREBASE_PROJECT_ID, FIREBASE_CLIENT_EMAIL, FIREBASE_PRIVATE_KEY } =
 
 if (!FIREBASE_PROJECT_ID || !FIREBASE_CLIENT_EMAIL || !FIREBASE_PRIVATE_KEY) {
   throw new Error(
-    "Missing Firebase Admin credentials. Ensure FIREBASE_PROJECT_ID, FIREBASE_CLIENT_EMAIL, and FIREBASE_PRIVATE_KEY are set.",
+    "Missing Firebase Admin credentials. Ensure FIREBASE_PROJECT_ID, FIREBASE_CLIENT_EMAIL, and FIREBASE_PRIVATE_KEY are set."
   );
 }
 
 const globalForFirebaseAdmin = globalThis as typeof globalThis & {
-  firebaseAdmin?: typeof admin;
+  firebaseAdminApp?: admin.app.App;
 };
 
-const firebaseAdmin =
-  globalForFirebaseAdmin.firebaseAdmin ??
+const firebaseAdminApp =
+  globalForFirebaseAdmin.firebaseAdminApp ??
   admin.initializeApp({
     credential: admin.credential.cert({
       projectId: FIREBASE_PROJECT_ID,
@@ -23,8 +23,8 @@ const firebaseAdmin =
     }),
   });
 
-globalForFirebaseAdmin.firebaseAdmin = firebaseAdmin;
+globalForFirebaseAdmin.firebaseAdminApp = firebaseAdminApp;
 
-export const auth = firebaseAdmin.auth();
-export const db = firebaseAdmin.firestore();
-export default firebaseAdmin;
+export const auth = firebaseAdminApp.auth();
+export const db = firebaseAdminApp.firestore();
+export default firebaseAdminApp;
